@@ -1,0 +1,28 @@
+{
+  "name": "@ftbl/authorize",
+  "version": "0.0.0",
+  "description": "Authorization system",
+  "main": "node index",
+  "scripts": {
+    "test": "gulp test"
+  },
+  "engines": {
+    "node": "0.12.x",
+    "npm": "2.x"
+  },
+  "author": "Johnny Hall",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:projectftbl/authorize.git"
+  },
+  "dependencies": {
+    "lodash": "^3.10.1"
+  },
+  "devDependencies": {
+    "@ftbl/gulp": "^1.0.0",
+    "chai": "^3.2.0",
+    "gulp": "^3.9.0",
+    "mocha": "^2.2.5"
+  }
+}
