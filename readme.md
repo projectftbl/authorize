@@ -1,3 +1,3 @@
-## Addle
+## @ftbl/authorize
 
 Authorization system.
