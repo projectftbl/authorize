@@ -1,3 +1,3 @@
 ## @ftbl/authorize
 
-Authorization system.
+Authorization system based on claims.
