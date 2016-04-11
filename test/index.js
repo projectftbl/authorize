@@ -8,8 +8,8 @@ describe('When using the Authorizer service', function() {
 
   var suite = this;
 
-  var p = function(thing, permission) {
-    return { thing: thing, permission: permission }
+  var p = function(entity, right) {
+    return { entity: entity, right: right }
   };
 
   describe('From roles', function() {
@@ -18,7 +18,7 @@ describe('When using the Authorizer service', function() {
     });
 
     it('Should map empty permissions from empty roles', function() {
-      suite.sut.fromRoles([]).should.deep.equal([]);
+      suite.sut.fromUser({ roles: [] }).should.deep.equal([]);
     });
   });
 
@@ -229,20 +229,20 @@ describe('When using the Authorizer service', function() {
     });
   });
 
-  function validate(thing, checks) {
+  function validate(entity, checks) {
 
     var message = function(check) {
       var m = 'should ';
       if (check[1] === false) m += 'not ';
       m += 'have access to ';
       m += _(rights).findKey(function(r) { return r === check[0] }).toLowerCase()
-      m += ' on ' + thing;
+      m += ' on ' + entity;
       return m;
     };
 
     checks.forEach(function(check) {
       it(message(check), function() {
-        suite.sut.can(thing, check[0]).should.equal(check[1]);
+        suite.sut.can(entity, check[0]).should.equal(check[1]);
       });
     });
   };
