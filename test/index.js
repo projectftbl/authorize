@@ -18,7 +18,7 @@ describe('When using the Authorizer service', function() {
     });
 
     it('Should map empty permissions from empty roles', function() {
-      suite.sut.fromUser({ roles: [] }).should.deep.equal([]);
+      Sut.fromUser({ roles: [] }).should.deep.equal([]);
     });
   });
 
