@@ -29,29 +29,11 @@ describe('When using the Authorizer service', function() {
 
     validate('thing', [
       [ rights.Nothing, true  ]
-    , [ rights.Lookup,  false ]
     , [ rights.Read,    false ]
     , [ rights.Create,  false ]
     , [ rights.Update,  false ]
     , [ rights.Destroy, false ]
     ]);
-  });
-
-  describe('With lookup permissions', function() {
-
-    before(function() {
-      suite.sut = new Sut(p('thing', permissions.Lookup));
-    });
-
-    validate('thing', [
-      [ rights.Nothing, true  ]
-    , [ rights.Lookup,  true  ]
-    , [ rights.Read,    false ]
-    , [ rights.Create,  false ]
-    , [ rights.Update,  false ]
-    , [ rights.Destroy, false ]
-    ]);
-
   });
 
   describe('With read only permissions', function() {
@@ -62,7 +44,6 @@ describe('When using the Authorizer service', function() {
 
     validate('thing', [
       [ rights.Nothing, true  ]
-    , [ rights.Lookup,  true  ]
     , [ rights.Read,    true  ]
     , [ rights.Create,  false ]
     , [ rights.Update,  false ]
@@ -78,7 +59,6 @@ describe('When using the Authorizer service', function() {
 
     validate('thing', [
       [ rights.Nothing, true  ]
-    , [ rights.Lookup,  true  ]
     , [ rights.Read,    true  ]
     , [ rights.Create,  false ]
     , [ rights.Update,  true  ]
@@ -94,7 +74,6 @@ describe('When using the Authorizer service', function() {
 
     validate('thing', [
       [ rights.Nothing, true  ]
-    , [ rights.Lookup,  true  ]
     , [ rights.Read,    true  ]
     , [ rights.Create,  true  ]
     , [ rights.Update,  true  ]
@@ -110,7 +89,6 @@ describe('When using the Authorizer service', function() {
 
     validate('thing', [
       [ rights.Nothing, true  ]
-    , [ rights.Lookup,  true  ]
     , [ rights.Read,    true  ]
     , [ rights.Create,  false ]
     , [ rights.Update,  true  ]
@@ -127,7 +105,6 @@ describe('When using the Authorizer service', function() {
 
     validate('thing', [
       [ rights.Nothing, true  ]
-    , [ rights.Lookup,  true  ]
     , [ rights.Read,    true  ]
     , [ rights.Create,  false ]
     , [ rights.Update,  true  ]
@@ -144,7 +121,6 @@ describe('When using the Authorizer service', function() {
 
     validate('thing', [
       [ rights.Nothing, true  ]
-    , [ rights.Lookup,  true  ]
     , [ rights.Read,    true  ]
     , [ rights.Create,  false ]
     , [ rights.Update,  false ]
@@ -153,7 +129,6 @@ describe('When using the Authorizer service', function() {
 
     validate('other', [
       [ rights.Nothing, true  ]
-    , [ rights.Lookup,  true  ]
     , [ rights.Read,    true  ]
     , [ rights.Create,  true  ]
     , [ rights.Update,  true  ]
@@ -167,12 +142,11 @@ describe('When using the Authorizer service', function() {
     before(function() {
       suite.sut = new Sut([ 
         p('thing', permissions.ReadOnly),   p('thing', permissions.Editor)
-      , p('other', permissions.Lookup),     p('other', permissions.ReadOnly) ]);
+      , p('other', permissions.ReadOnly) ]);
     });
 
     validate('thing', [
       [ rights.Nothing, true  ]
-    , [ rights.Lookup,  true  ]
     , [ rights.Read,    true  ]
     , [ rights.Create,  false ]
     , [ rights.Update,  true ]
@@ -181,7 +155,6 @@ describe('When using the Authorizer service', function() {
 
     validate('other', [
       [ rights.Nothing, true  ]
-    , [ rights.Lookup,  true  ]
     , [ rights.Read,    true  ]
     , [ rights.Create,  false ]
     , [ rights.Update,  false ]
@@ -198,7 +171,6 @@ describe('When using the Authorizer service', function() {
 
     validate('thing', [
       [ rights.Nothing, true  ]
-    , [ rights.Lookup,  true  ]
     , [ rights.Read,    true  ]
     , [ rights.Create,  false ]
     , [ rights.Update,  false ]
@@ -214,10 +186,6 @@ describe('When using the Authorizer service', function() {
 
     it('should have access to read thing', function() {
       suite.sut.can('read thing').should.equal(true);
-    });
-
-    it('should have access to lookup thing', function() {
-      suite.sut.can('lookup thing').should.equal(true);
     });
 
     it('should not have access to create thing', function() {
