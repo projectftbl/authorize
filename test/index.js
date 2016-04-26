@@ -24,7 +24,7 @@ describe('When using the Authorizer service', function() {
 
   describe('With no permissions', function() {
     before(function() {
-      suite.sut = new Sut(p('thing', permissions.None));
+      suite.sut = new Sut(p('thing', permissions.Deny));
     });
 
     validate('thing', [
@@ -33,6 +33,7 @@ describe('When using the Authorizer service', function() {
     , [ rights.Create,  false ]
     , [ rights.Update,  false ]
     , [ rights.Destroy, false ]
+    , [ rights.Manage,  false ]
     ]);
   });
 
@@ -48,6 +49,7 @@ describe('When using the Authorizer service', function() {
     , [ rights.Create,  false ]
     , [ rights.Update,  false ]
     , [ rights.Destroy, false ]
+    , [ rights.Manage,  false ]
     ]);
   });
 
@@ -63,13 +65,14 @@ describe('When using the Authorizer service', function() {
     , [ rights.Create,  false ]
     , [ rights.Update,  true  ]
     , [ rights.Destroy, false ]
+    , [ rights.Manage,  false ]
     ]);
   });
 
   describe('With full permissions', function() {
 
     before(function() {
-      suite.sut = new Sut(p('thing', permissions.FullAccess));
+      suite.sut = new Sut(p('thing', permissions.FullControl));
     });
 
     validate('thing', [
@@ -78,6 +81,7 @@ describe('When using the Authorizer service', function() {
     , [ rights.Create,  true  ]
     , [ rights.Update,  true  ]
     , [ rights.Destroy, true  ]
+    , [ rights.Manage,  true  ]
     ]);
   });
 
@@ -93,14 +97,15 @@ describe('When using the Authorizer service', function() {
     , [ rights.Create,  false ]
     , [ rights.Update,  true  ]
     , [ rights.Destroy, false ]
+    , [ rights.Manage,  false ]
     ]);
 
   });
 
-  describe('With multiple permissions (including no access) for the same thing', function() {
+  describe('With multiple permissions (including deny) for the same thing', function() {
 
     before(function() {
-      suite.sut = new Sut([ p('thing', permissions.NoAccess), p('thing', permissions.Editor) ]);
+      suite.sut = new Sut([ p('thing', permissions.Deny), p('thing', permissions.Editor) ]);
     });
 
     validate('thing', [
@@ -109,6 +114,7 @@ describe('When using the Authorizer service', function() {
     , [ rights.Create,  false ]
     , [ rights.Update,  true  ]
     , [ rights.Destroy, false ]
+    , [ rights.Manage,  false ]
     ]);
 
   });
@@ -116,7 +122,7 @@ describe('When using the Authorizer service', function() {
   describe('With multiple, different, separate permissions for different things', function() {
 
     before(function() {
-      suite.sut = new Sut([ p('thing', permissions.ReadOnly), p('other', permissions.FullAccess) ]);
+      suite.sut = new Sut([ p('thing', permissions.ReadOnly), p('other', permissions.FullControl) ]);
     });
 
     validate('thing', [
@@ -125,6 +131,7 @@ describe('When using the Authorizer service', function() {
     , [ rights.Create,  false ]
     , [ rights.Update,  false ]
     , [ rights.Destroy, false ]
+    , [ rights.Manage,  false ]
     ]);
 
     validate('other', [
@@ -133,6 +140,7 @@ describe('When using the Authorizer service', function() {
     , [ rights.Create,  true  ]
     , [ rights.Update,  true  ]
     , [ rights.Destroy, true  ]
+    , [ rights.Manage,  true  ]
     ]);
 
   });
@@ -151,6 +159,7 @@ describe('When using the Authorizer service', function() {
     , [ rights.Create,  false ]
     , [ rights.Update,  true ]
     , [ rights.Destroy, false ]
+    , [ rights.Manage,  false ]
     ]);
 
     validate('other', [
@@ -159,6 +168,7 @@ describe('When using the Authorizer service', function() {
     , [ rights.Create,  false ]
     , [ rights.Update,  false ]
     , [ rights.Destroy, false ]
+    , [ rights.Manage,  false ]
     ]);
 
   });
@@ -175,6 +185,7 @@ describe('When using the Authorizer service', function() {
     , [ rights.Create,  false ]
     , [ rights.Update,  false ]
     , [ rights.Destroy, false ]
+    , [ rights.Manage,  false ]
     ]);
 
   });
