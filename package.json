@@ -1,5 +1,5 @@
 {
-  "name": "@ftbl/authorize",
+  "name": "@recipher/authorize",
   "version": "1.2.0",
   "description": "Authorization system",
   "main": "node index",
@@ -14,13 +14,13 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git@github.com:projectftbl/authorize.git"
+    "url": "git@github.com:recipher/authorize.git"
   },
   "dependencies": {
     "lodash": "^3.10.1"
   },
   "devDependencies": {
-    "@ftbl/gulp": "^1.0.0",
+    "@recipher/gulp": "^1.0.0",
     "chai": "^3.2.0",
     "gulp": "^3.9.0",
     "mocha": "^2.2.5"

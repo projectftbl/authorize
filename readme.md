@@ -1,3 +1,3 @@
-## @ftbl/authorize
+## @recipher/authorize
 
 Authorization system based on claims.
